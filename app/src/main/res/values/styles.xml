@@ -27,7 +27,7 @@
     </style>
 
     <style name="TextViewStyle.Large" parent="TextViewStyle">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/black</item>
 
     </style>

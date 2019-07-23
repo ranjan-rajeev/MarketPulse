@@ -17,15 +17,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Top GAiners"
-            android:textColor="@color/uvv_black" />
+            android:textColor="@color/uvv_black"
+            android:textStyle="bold" />
 
         <TextView
-
             android:id="@+id/tvTag"
             style="@style/TextViewStyle.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Top GAiners"
-            android:textColor="@color/red_descent" />
+            android:textColor="@color/red_descent"
+            android:textStyle="bold" />
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>
