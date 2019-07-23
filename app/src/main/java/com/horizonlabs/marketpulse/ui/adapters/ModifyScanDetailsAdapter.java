@@ -9,12 +9,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.horizonlabs.marketpulse.R;
+import com.horizonlabs.marketpulse.utils.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,6 +26,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+import okhttp3.internal.Util;
 
 /**
  * Created by Rajeev Ranjan -  ABPB on 22-07-2019.
@@ -70,6 +75,8 @@ public class ModifyScanDetailsAdapter extends RecyclerView.Adapter<RecyclerView.
             for (int j = 0; j < optJSONArray.length(); j++) {
                 valuesArray[j] = optJSONArray.optDouble(j);
             }
+            Collections.sort(Arrays.asList(valuesArray));
+
             ArrayAdapter<Double> adapter = new ArrayAdapter<Double>(context, android.R.layout.simple_spinner_dropdown_item, valuesArray);
 
             ((SpinnerVewiHolder) holder).spValues.setAdapter(adapter);
@@ -78,14 +85,14 @@ public class ModifyScanDetailsAdapter extends RecyclerView.Adapter<RecyclerView.
         } else if (holder instanceof ParameterViewHolder) {
             JSONObject jsonObject = values.get(position);
             ((ParameterViewHolder) holder).tvTitle.setText(jsonObject.optString("study_type"));
-            ((ParameterViewHolder) holder).etModify.setHint(
-                    jsonObject.optString("parameter_name") + " "
-                            + jsonObject.optString("min_value") + " "
-                            + jsonObject.optString("max_value") + " "
+            ((ParameterViewHolder) holder).til.setHint(
+                    jsonObject.optString("parameter_name") + " ( "
+                            + Utility.getFormattedDouble(jsonObject.optDouble("min_value")) + " - "
+                            + Utility.getFormattedDouble(jsonObject.optDouble("max_value")) + " )"
 
             );
 
-            ((ParameterViewHolder) holder).etModify.setText(jsonObject.optString("default_value"));
+            ((ParameterViewHolder) holder).etModify.setText(Utility.getFormattedDouble(jsonObject.optDouble("default_value")));
 
         }
     }
@@ -123,11 +130,13 @@ public class ModifyScanDetailsAdapter extends RecyclerView.Adapter<RecyclerView.
 
         TextView tvTitle;
         EditText etModify;
+        TextInputLayout til;
 
         public ParameterViewHolder(@NonNull final View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             etModify = itemView.findViewById(R.id.etModify);
+            til = itemView.findViewById(R.id.til);
         }
     }
 

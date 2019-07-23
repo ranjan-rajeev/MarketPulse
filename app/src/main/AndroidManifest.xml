@@ -32,6 +32,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:windowSoftInputMode="stateAlwaysVisible"
             android:name=".ui.activity.ScanDetailsActivity"
             android:label="@string/title_activity_scan_details"
             android:parentActivityName=".ui.activity.MainActivity"

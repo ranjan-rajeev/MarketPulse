@@ -7,6 +7,7 @@ import com.horizonlabs.marketpulse.data.remote.ScanResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,19 +61,20 @@ public class Utility {
             for (int i = 0; i < splited.length; i++) {
                 char c = splited[i].charAt(0);
                 if (c == '$') {
+                    String temp = "";
                     if (variable.getJSONObject(splited[i]).optString("type").equals("indicator")) {
 
-                        finalString = finalString + " (" +
-                                variable.getJSONObject(splited[i])
-                                        .optString("default_value")+")";
+                        temp = getFormattedDouble(variable.getJSONObject(splited[i])
+                                .optDouble("default_value"));
 
                     } else if (variable.getJSONObject(splited[i]).optString("type").equals("value")) {
 
-                        finalString = finalString + " (" +
-                                variable.getJSONObject(splited[i])
-                                        .getJSONArray("values")
-                                        .optDouble(0)+")";
+                        temp = getFormattedDouble(variable.getJSONObject(splited[i])
+                                .getJSONArray("values")
+                                .optDouble(0));
                     }
+                    finalString = finalString + " (" + temp + ")";
+
 
                 } else {
                     finalString = finalString + " " + splited[i];
@@ -84,4 +86,11 @@ public class Utility {
 
         return finalString;
     }
+
+    public static String getFormattedDouble(double d) {
+        DecimalFormat format = new DecimalFormat("0.#");
+        return format.format(d);
+    }
+
+
 }
