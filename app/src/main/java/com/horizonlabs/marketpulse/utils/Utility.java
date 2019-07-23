@@ -2,7 +2,7 @@ package com.horizonlabs.marketpulse.utils;
 
 import com.google.gson.Gson;
 import com.horizonlabs.marketpulse.data.local.model.ScanEntity;
-import com.horizonlabs.marketpulse.data.remote.ScanResponse;
+import com.horizonlabs.marketpulse.data.remote.pojo.ScanResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -92,5 +92,19 @@ public class Utility {
         return format.format(d);
     }
 
+    public static String[] getFormattedStringArray(Double d[]) {
+        String[] s = new String[d.length];
+        for (int i = 0; i < d.length; i++) {
+            s[i] = getFormattedDouble(d[i]);
+        }
+        return s;
+    }
 
+    public static int getIndex(String[] strings, String s) {
+        for (int i = 0; i < strings.length; i++) {
+            if (s.equals(strings[i]))
+                return i;
+        }
+        return 0;
+    }
 }

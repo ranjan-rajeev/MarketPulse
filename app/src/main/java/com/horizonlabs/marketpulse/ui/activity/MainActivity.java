@@ -21,7 +21,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements ScanAdapter.ItemClick {
 
     MainViewModel mainViewModel;
     RecyclerView rvScanHome;
@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher_round);
         setUpRecyclerView();
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
@@ -42,19 +42,13 @@ public class MainActivity extends BaseActivity {
         mainViewModel.getAllScan().observe(MainActivity.this, new Observer<List<ScanEntity>>() {
             @Override
             public void onChanged(List<ScanEntity> scanEntities) {
-                if (scanEntities != null) {
+                if (scanEntities != null && scanEntities.size() > 0) {
                     scanAdapter.setScanEntities(scanEntities);
                 }
             }
         });
 
-        scanAdapter.setOnItemClickListener(new ScanAdapter.ItemClick() {
-            @Override
-            public void onItemClick(ScanEntity scanEntity) {
-                startActivity(new Intent(MainActivity.this, ScanDetailsActivity.class)
-                        .putExtra(Constants.SCAN, scanEntity.getId()));
-            }
-        });
+        scanAdapter.setOnItemClickListener(this);
 
     }
 
@@ -86,5 +80,11 @@ public class MainActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(ScanEntity scanEntity) {
+        startActivity(new Intent(MainActivity.this, ScanDetailsActivity.class)
+                .putExtra(Constants.SCAN, scanEntity.getId()));
     }
 }

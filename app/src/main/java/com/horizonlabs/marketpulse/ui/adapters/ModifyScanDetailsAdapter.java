@@ -72,14 +72,17 @@ public class ModifyScanDetailsAdapter extends RecyclerView.Adapter<RecyclerView.
             JSONObject jsonObject = values.get(position);
             JSONArray optJSONArray = jsonObject.optJSONArray("values");
             Double valuesArray[] = new Double[optJSONArray.length()];
+            String strings[] = new String[optJSONArray.length()];
             for (int j = 0; j < optJSONArray.length(); j++) {
                 valuesArray[j] = optJSONArray.optDouble(j);
             }
+            String s = Utility.getFormattedDouble(valuesArray[0]);
             Collections.sort(Arrays.asList(valuesArray));
-
-            ArrayAdapter<Double> adapter = new ArrayAdapter<Double>(context, android.R.layout.simple_spinner_dropdown_item, valuesArray);
+            strings = Utility.getFormattedStringArray(valuesArray);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, strings);
 
             ((SpinnerVewiHolder) holder).spValues.setAdapter(adapter);
+            ((SpinnerVewiHolder) holder).spValues.setSelection(Utility.getIndex(strings, s), true);
 
 
         } else if (holder instanceof ParameterViewHolder) {
@@ -140,10 +143,6 @@ public class ModifyScanDetailsAdapter extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    public void setScanList(LinkedHashMap<String, JSONObject> variables) {
-        this.variables = variables;
-        values = new ArrayList<>(variables.values());
-        notifyDataSetChanged();
-    }
+
 
 }

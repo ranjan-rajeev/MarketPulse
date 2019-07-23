@@ -46,7 +46,7 @@ public class ScanDetailsActivity extends BaseActivity {
                 if (scan != null) {
                     scanEntity = scan;
                     bindViews();
-                    //Toast.makeText(ScanDetailsActivity.this, "" + scanEntity.getCriteria(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ScanDetailsActivity.this, "" + scanEntity.getCriteriaStringList(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -59,7 +59,9 @@ public class ScanDetailsActivity extends BaseActivity {
             tvTag.setTextColor(Color.GREEN);
         else
             tvTag.setTextColor(Color.RED);
-        scanDetailsAdapter.setScanList(scanDetailsViewModel.getCriteria(scanEntity.getCriteria()),
+
+        scanDetailsAdapter.setScanList(
+                scanDetailsViewModel.getCriteriaStringList(scanEntity.getCriteria()),
                 scanDetailsViewModel.getVariables(scanEntity.getCriteria()));
 
     }

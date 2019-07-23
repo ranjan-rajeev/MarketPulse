@@ -1,7 +1,7 @@
 package com.horizonlabs.marketpulse.data.remote;
 
 
-import com.horizonlabs.marketpulse.data.local.model.ScanEntity;
+import com.horizonlabs.marketpulse.data.remote.pojo.ScanResponse;
 
 import java.util.List;
 

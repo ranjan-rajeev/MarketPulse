@@ -1,4 +1,4 @@
-package com.horizonlabs.marketpulse.data.remote;
+package com.horizonlabs.marketpulse.data.remote.pojo;
 
 import java.util.List;
 

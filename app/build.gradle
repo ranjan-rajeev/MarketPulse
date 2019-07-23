@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'marketpulse'
             keyPassword 'marketpulse'
-            storeFile file('D:/Rajeev/signedapk/marketpulse/marketpulse.jks')
+            storeFile file('E:\\androidprojects\\signedapk\\marketpulse\\marketpulse.jks')
             storePassword 'marketpulse'
         }
     }
@@ -25,12 +25,12 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable false
             signingConfig signingConfigs.config
-            zipAlignEnabled true
+            zipAlignEnabled false
         }
     }
     productFlavors {

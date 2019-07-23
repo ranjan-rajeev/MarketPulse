@@ -31,13 +31,4 @@ public abstract class MarketPulseDatabase extends RoomDatabase {
         }
         return marketPulseDatabase;
     }
-
-    private static Callback callback = new Callback() {
-
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-        }
-    };
-
 }

@@ -43,7 +43,7 @@ public class ScanDetailsViewModel extends AndroidViewModel {
         return scanRepository.getScanEntity(id);
     }
 
-    public List<String> getCriteria(String jsonString) {
+    public List<String> getCriteriaStringList(String jsonString) {
         List<String> criteriaList = new ArrayList<>();
 
         try {
@@ -54,40 +54,13 @@ public class ScanDetailsViewModel extends AndroidViewModel {
 
                 String type = criteria.optString("type");
                 String text = criteria.optString("text");
-                String study_type, parameter_name, min_value, max_value, default_value;
-                int[] values;
                 //region  variable parsing
 
                 if (type.equals("variable") && criteria.has("variable")) {
 
-                    List<String> keys = Utility.getListKeys(text);
-
                     JSONObject variable = criteria.getJSONObject("variable");
 
                     text = Utility.getReplacedString(text, variable);
-
-                    /*for (String key : keys) {
-
-                        String typeDetail = variable.getString("type"); //indicator or value
-
-                        if (typeDetail.equals("indicator")) { // indicator parsing
-
-                            study_type = variable.optString("study_type");
-                            parameter_name = variable.optString("parameter_name");
-                            min_value = variable.optString("min_value");
-                            max_value = variable.optString("max_value");
-                            default_value = variable.optString("default_value");
-
-                        } else if (typeDetail.equals("value")) { //value parsing
-                            if (variable.has("values")) {
-                                JSONArray valuesArray = variable.getJSONArray("values");
-                                values = new int[valuesArray.length()];
-                                for (int j = 0; j < valuesArray.length(); j++) {
-                                    values[i] = valuesArray.optInt(i);
-                                }
-                            }
-                        }
-                    }*/
                 }
                 //endregion
 
@@ -99,21 +72,6 @@ public class ScanDetailsViewModel extends AndroidViewModel {
         }
         return criteriaList;
     }
-
-    public List<JSONObject> getVariable(String jsonString) {
-        List<JSONObject> variables = new ArrayList<>();
-        try {
-            JSONArray criteriaArray = new JSONArray(jsonString);
-            for (int i = 0; i < criteriaArray.length(); i++) {
-                JSONObject criteria = criteriaArray.getJSONObject(i);
-                variables.add(criteria);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return variables;
-    }
-
 
     public List<LinkedHashMap<String, JSONObject>> getVariables(String jsonString) {
 

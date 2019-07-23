@@ -26,17 +26,11 @@ public class MainViewModel extends AndroidViewModel {
         allScan = scanRepository.getAllScan();
     }
 
-
     public void insert(ScanEntity... scanEntities) {
         scanRepository.insert(scanEntities);
     }
 
     public void update(ScanEntity scanEntity) {
-        /*if (userEntity.getIsBookmarked() == 0) {
-            userEntity.setIsBookmarked(1);
-        } else {
-            userEntity.setIsBookmarked(0);
-        }*/
         scanRepository.update(scanEntity);
     }
 

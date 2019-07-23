@@ -8,7 +8,7 @@ import com.horizonlabs.marketpulse.data.local.dao.ScanDao;
 import com.horizonlabs.marketpulse.data.local.model.ScanEntity;
 import com.horizonlabs.marketpulse.data.remote.RetrofitClent;
 import com.horizonlabs.marketpulse.data.remote.ScanApi;
-import com.horizonlabs.marketpulse.data.remote.ScanResponse;
+import com.horizonlabs.marketpulse.data.remote.pojo.ScanResponse;
 import com.horizonlabs.marketpulse.utils.Logger;
 import com.horizonlabs.marketpulse.utils.Utility;
 
