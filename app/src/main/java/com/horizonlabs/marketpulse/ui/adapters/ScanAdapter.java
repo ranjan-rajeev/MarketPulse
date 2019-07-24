@@ -66,6 +66,12 @@ public class ScanAdapter extends RecyclerView.Adapter<ScanAdapter.UserHolder> {
                         itemClick.onItemClick(scanEntities.get(getAdapterPosition()));
                 }
             });
+
+
+        }
+
+        public TextView getTextViewNAme() {
+            return tvName;
         }
     }
 
